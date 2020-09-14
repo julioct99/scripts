@@ -14,7 +14,6 @@ then
   fi
   SRC=$1
       
-
   rsync -av -progress -e \
     "ssh -i ~/.ssh/julio_docker_test.pem" \
     $SRC \
