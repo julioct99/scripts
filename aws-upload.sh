@@ -3,10 +3,12 @@
 
 # <-------------------- VARS ----------------------------------------->
 
-# Path to the source folder in the local machine
+# Path to the source folder in the local machine.
+# Dont touch, value will be overwritten by script args
 SRC=""
 
-# Path to the destination folder in the remote machine
+# Path to the destination folder in the remote machine. 
+# Dont touch, value will be overwritten by script args
 DEST="~"
 
 # Path to the ssh key
