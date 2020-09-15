@@ -2,9 +2,9 @@
 
 SRC=""
 DEST="~"
-KEY="ssh -i ~/.ssh/julio_docker_test.pem"
-USER="ubuntu"
-HOST="18.224.27.200"
+KEY=$(sed '1q;d' ~/scripts/data/aws.txt)
+USER=$(sed '2q;d' ~/scripts/data/aws.txt)
+HOST=$(sed '3q;d' ~/scripts/data/aws.txt)
 
 if [ $# -ge 1 -a $# -lt 3 ]
 then
@@ -15,7 +15,7 @@ then
   SRC=$1
       
   rsync -av -progress -e \
-    "ssh -i ~/.ssh/julio_docker_test.pem" \
+    "ssh -i "$KEY \
     $SRC \
     $USER@$HOST:$DEST
 else
