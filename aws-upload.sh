@@ -1,10 +1,24 @@
 #!/bin/bash
+# Upload a folder from local environment to a remote machine
 
+# <-------------------- VARS ----------------------------------------->
+
+# Path to the source folder in the local machine
 SRC=""
+
+# Path to the destination folder in the remote machine
 DEST="~"
+
+# Path to the ssh key
 KEY=$(sed '1q;d' ~/scripts/data/aws.txt)
+
+# User at the remote machine
 USER=$(sed '2q;d' ~/scripts/data/aws.txt)
+
+# Host at the remote machine
 HOST=$(sed '3q;d' ~/scripts/data/aws.txt)
+
+# <------------------------------------------------------------------>
 
 if [ $# -ge 1 -a $# -lt 3 ]
 then
