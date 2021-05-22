@@ -4,40 +4,29 @@
 # <-------------------- VARS ----------------------------------------->
 
 # File to read key, user and host
-DATAFILE="aws.txt"
+DATAFILE=$1".txt"
+source ~/scripts/data/$DATAFILE
 
-# Path to the source folder in the local machine.
+# Path to the source and destination folders in the local machine
 # Dont touch, value will be overwritten by script args
 SRC=""
-
-# Path to the destination folder in the remote machine. 
-# Dont touch, value will be overwritten by script args
 DEST="~"
-
-# Path to the ssh key
-KEY=$(sed '1q;d' ~/scripts/data/$DATAFILE)
-
-# User at the remote machine
-USER=$(sed '2q;d' ~/scripts/data/$DATAFILE)
-
-# Host at the remote machine
-HOST=$(sed '3q;d' ~/scripts/data/$DATAFILE)
 
 # <------------------------------------------------------------------>
 
-if [ $# -ge 1 -a $# -lt 3 ]
+if [ $# -ge 1 -a $# -lt 4 ]
 then
-  if [ $# -eq 2 ]
+  if [ $# -eq 3 ]
   then 
-    DEST=$2
+    DEST=$3
   fi
-  SRC=$1
+  SRC=$2
       
   rsync -av -progress -e \
-    "ssh -i "$KEY \
+    "ssh -i "$KEY_PATH \
     $SRC \
     $USER@$HOST:$DEST
 else
   echo "You must provide 1 or 2 parameters"
-  echo "Use: upload src_path [dest_path]"
+  echo "Use: aws-upload datafile src_path [dest_path?]"
 fi
